@@ -99,21 +99,21 @@ const Game = (() => {
       arr[1].mark === arr[2].mark &&
       arr[1].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[1]));
     }
     if (
       arr[3].mark === arr[4].mark &&
       arr[4].mark === arr[5].mark &&
       arr[4].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[4]));
     }
     if (
       arr[6].mark === arr[7].mark &&
       arr[7].mark === arr[8].mark &&
       arr[7].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[7]));
     }
     // columns
     if (
@@ -121,21 +121,21 @@ const Game = (() => {
       arr[3].mark === arr[6].mark &&
       arr[3].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[3]));
     }
     if (
       arr[1].mark === arr[4].mark &&
       arr[4].mark === arr[7].mark &&
       arr[4].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[4]));
     }
     if (
       arr[2].mark === arr[5].mark &&
       arr[5].mark === arr[8].mark &&
       arr[5].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[5]));
     }
     // diagonal
     if (
@@ -143,16 +143,34 @@ const Game = (() => {
       arr[4].mark === arr[8].mark &&
       arr[4].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[4]));
     }
     if (
-      arr[3].mark === arr[5].mark &&
-      arr[5].mark === arr[6].mark &&
+      arr[2].mark === arr[4].mark &&
+      arr[4].mark === arr[6].mark &&
       arr[5].active === false
     ) {
-      console.log("Win!");
+      showWinner(gameboardArr.indexOf(arr[4]));
     }
+
+    showWinner = (index) => {
+      if (gameboardArr[index].mark === players[0].mark) {
+        console.log(`${players[0].name} Win!`);
+      } else {
+        console.log(`${players[1].name} Win!`);
+      }
+    };
   };
 
   return { startGame, addMark, addPlayer };
 })();
+
+Game.startGame();
+Game.addPlayer("Alex");
+Game.addPlayer("Chuj");
+Game.addMark(5);
+Game.addMark(0);
+Game.addMark(6);
+Game.addMark(1);
+Game.addMark(3);
+Game.addMark(2);
