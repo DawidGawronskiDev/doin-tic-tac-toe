@@ -13,8 +13,8 @@ const Game = (() => {
 
   let gameboard;
   let fields;
-  let mark = "X";
   let players = [];
+  let currentPlayer;
 
   const playerFactory = (name, mark) => {
     return { name, mark };
@@ -22,6 +22,7 @@ const Game = (() => {
 
   const addPlayer = (name, mark) => {
     players.push(playerFactory(name, mark));
+    currentPlayer = players[0];
     checkPlayers();
   };
 
@@ -36,9 +37,6 @@ const Game = (() => {
     }
     if (players[1] && players[0].mark === "O") {
       players[1].mark = "X";
-    }
-    if (players[1] && players[0].name === players[1].name) {
-      players.pop();
     }
     //IF THERE ARE TWO PLAYERS
     if (players.length > 2) {
@@ -69,15 +67,15 @@ const Game = (() => {
   };
 
   const bindEvents = () => {
-    fields.forEach((field) => field.addEventListener("click", addMark));
+    fields.forEach((field) => field.addEventListener("click", placeMark));
   };
 
-  const addMark = (e) => {
+  const placeMark = (e) => {
     const type = typeof e;
     type == "number" ? (e = e) : (e = fields.indexOf(e.target));
     let index = e;
     if (gameboardArr[index].active === true) {
-      gameboardArr[index].mark = mark;
+      gameboardArr[index].mark = currentPlayer.mark;
       gameboardArr[index].active = false;
       changePlayer();
 
@@ -89,8 +87,19 @@ const Game = (() => {
   };
 
   const changePlayer = () => {
-    mark === "X" ? (mark = "O") : (mark = "X");
+    currentPlayer === players[0] ? currentPlayer = players[1] : currentPlayer = players[0];
+    aiLogic();
   };
+
+  const aiLogic = () => {
+    if (currentPlayer.name === "AI") {
+      let aiPick = Math.floor(Math.random() * 9);
+      if (gameboardArr[aiPick].active === false) {
+        aiPick = Math.floor(Math.random() * 9)
+      }
+      placeMark(aiPick)
+    }
+  }
 
   const checkWinner = (arr) => {
     // rows
@@ -148,7 +157,7 @@ const Game = (() => {
     if (
       arr[2].mark === arr[4].mark &&
       arr[4].mark === arr[6].mark &&
-      arr[5].active === false
+      arr[4].active === false
     ) {
       showWinner(gameboardArr.indexOf(arr[4]));
     }
@@ -162,15 +171,9 @@ const Game = (() => {
     };
   };
 
-  return { startGame, addMark, addPlayer };
+  return { startGame, placeMark, addPlayer };
 })();
 
 Game.startGame();
-Game.addPlayer("Alex");
-Game.addPlayer("Chuj");
-Game.addMark(5);
-Game.addMark(0);
-Game.addMark(6);
-Game.addMark(1);
-Game.addMark(3);
-Game.addMark(2);
+Game.addPlayer("AI");
+Game.addPlayer("Wezuwiusz")
