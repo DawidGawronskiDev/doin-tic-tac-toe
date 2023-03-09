@@ -2,13 +2,42 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Tic Tac Toe</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <ul id="gameboard"></ul>
-    <script src="./app.js"></script>
+    <main class="main">
+      <header class="header">
+        <div class="header-logo">
+          <img class="header-logo-x" src="./assets/icon-x.svg" />
+          <img class="header-logo-o" src="./assets/icon-o.svg" />
+        </div>
+        <div class="turn-display"></div>
+        <div class="restart"></div>
+      </header>
+      <ul class="gameboard X">
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+        <li class="field" data-active="true" data-mark=" "></li>
+      </ul>
+    </main>
+
+    <script src="./js/app.js"></script>
   </body>
 </html>
